@@ -42,4 +42,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_username"
         tools:text="Name Surname" />
 
+    <ProgressBar
+        android:id="@+id/pb_user"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/small"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_picture"
+        app:layout_constraintEnd_toEndOf="@+id/iv_picture"
+        app:layout_constraintStart_toStartOf="@+id/iv_picture"
+        app:layout_constraintTop_toTopOf="@+id/iv_picture" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
