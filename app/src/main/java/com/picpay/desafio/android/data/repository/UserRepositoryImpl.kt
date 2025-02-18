@@ -13,7 +13,7 @@ class UserRepositoryImpl(
 ): UserRepository {
 
     override suspend fun getUsers(): List<User> = async {
-        mapper.toDomain(service.getUsers())
+        mapper.toDomain(service.getUsers().distinct())
     }
 
 }

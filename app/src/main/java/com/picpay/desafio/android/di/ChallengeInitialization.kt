@@ -5,6 +5,9 @@ import com.picpay.desafio.android.data.mapper.UserMapper
 import com.picpay.desafio.android.data.repository.UserRepositoryImpl
 import com.picpay.desafio.android.data.source.remote.PicPayService
 import com.picpay.desafio.android.data.source.remote.RetrofitConfig
+import com.picpay.desafio.android.data.source.remote.entity.UserResponse
+import com.picpay.desafio.android.domain.mapper.DomainMapper
+import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.domain.repository.UserRepository
 import com.picpay.desafio.android.presentation.ui.users.viewmodel.UsersViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -22,7 +25,7 @@ class ChallengeInitialization: ModuleInitialization() {
             //endregion
 
             //region Mappers
-            single { UserMapper() }
+            single<DomainMapper<UserResponse, User>> { UserMapper() }
             //endregion
 
             //region ViewModels

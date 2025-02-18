@@ -4,6 +4,7 @@ package com.picpay.desafio.android.core.extensions
 import android.graphics.drawable.Drawable
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.FitCenter
 import com.bumptech.glide.request.RequestListener
@@ -15,6 +16,7 @@ private const val GLIDE_TAG = "GLIDE_TAG"
 
 fun AppCompatImageView.loadImage(
     imageUrl: String?,
+    forceCache: Boolean = false,
     transformCircle: Boolean = false,
     callback: RequestListener<Drawable>? = null
 ) = try {
@@ -22,18 +24,22 @@ fun AppCompatImageView.loadImage(
         error(R.drawable.ic_round_account_circle).transform(FitCenter())
     }
 
+    val cacheStrategy = if (forceCache) DiskCacheStrategy.ALL else DiskCacheStrategy.AUTOMATIC
+
     if (transformCircle) {
         Glide.with(this.context)
             .setDefaultRequestOptions(requestOptions)
             .load(imageUrl)
             .transform(CircleCrop())
             .listener(callback)
+            .diskCacheStrategy(cacheStrategy)
             .into(this)
     } else {
         Glide.with(this.context)
             .setDefaultRequestOptions(requestOptions)
             .load(imageUrl)
             .listener(callback)
+            .diskCacheStrategy(cacheStrategy)
             .into(this)
     }
 } catch (ex: Exception) {

@@ -1,48 +1,64 @@
 package com.picpay.desafio.android.presentation.ui.users
 
-import android.widget.ProgressBar
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.picpay.desafio.android.R
+import com.picpay.desafio.android.core.extensions.gone
+import com.picpay.desafio.android.core.extensions.onFailure
+import com.picpay.desafio.android.core.extensions.onSuccess
+import com.picpay.desafio.android.core.extensions.showError
+import com.picpay.desafio.android.core.extensions.visible
 import com.picpay.desafio.android.databinding.ActivityMainBinding
+import com.picpay.desafio.android.domain.model.Response
+import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.presentation.ui.users.adapter.UsersAdapter
+import com.picpay.desafio.android.presentation.ui.users.viewmodel.UsersViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var progressBar: ProgressBar
-    private lateinit var adapter: UsersAdapter
-
     private lateinit var binding: ActivityMainBinding
+
+    private val viewModel by viewModel<UsersViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setUpViews()
+        initViewModel()
+    }
+
+    private fun setUpViews() {
+        binding.rvUsers.adapter = UsersAdapter()
+    }
 
     override fun onResume() {
         super.onResume()
-
-        recyclerView = findViewById(R.id.recyclerView)
-        progressBar = findViewById(R.id.user_list_progress_bar)
-
-        adapter = UserListAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        progressBar.visibility = View.VISIBLE
-        service.getUsers()
-            .enqueue(object : Callback<List<UserResponse>> {
-                override fun onFailure(call: Call<List<UserResponse>>, t: Throwable) {
-                    val message = getString(R.string.error)
-
-                    progressBar.visibility = View.GONE
-                    recyclerView.visibility = View.GONE
-
-                    Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-                override fun onResponse(call: Call<List<UserResponse>>, response: Response<List<UserResponse>>) {
-                    progressBar.visibility = View.GONE
-
-                    adapter.userResponses = response.body()!!
-                }
-            })
+        viewModel.fetchUsers()
     }
+
+    private fun initViewModel() {
+        viewModel.users.observe(this) { response ->
+            when (response) {
+                is Response.Loading -> showLoading()
+                is Response.Idle -> Unit
+                else -> hideLoading()
+            }
+
+            response
+                .onSuccess { users: List<User> ->
+                    (binding.rvUsers.adapter as? UsersAdapter)?.submitList(users)
+                }
+                .onFailure { errorMessage: String ->
+                    showError(message = errorMessage)
+                }
+        }
+    }
+
+    private fun showLoading() = binding.pbUsers.visible()
+
+    private fun hideLoading() = binding.pbUsers.gone()
 }

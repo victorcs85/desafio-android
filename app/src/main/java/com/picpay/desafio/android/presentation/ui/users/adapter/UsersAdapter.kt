@@ -11,10 +11,8 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.picpay.desafio.android.core.extensions.loadImage
-import com.picpay.desafio.android.data.source.remote.entity.UserResponse
 import com.picpay.desafio.android.databinding.UserItemBinding
 import com.picpay.desafio.android.domain.model.User
-import javax.sql.DataSource
 
 class UsersAdapter : ListAdapter<User, UsersAdapter.UserViewHolder>(DiffCallback()) {
 
@@ -47,6 +45,7 @@ class UsersAdapter : ListAdapter<User, UsersAdapter.UserViewHolder>(DiffCallback
             userItemUsername.text = username
             userItemPicture.loadImage(
                 imageUrl = img,
+                forceCache = true,
                 transformCircle = true,
                 callback = object : RequestListener<Drawable> {
                     override fun onLoadFailed(
