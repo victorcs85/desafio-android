@@ -29,15 +29,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         setUpViews()
         initViewModel()
-    }
 
-    private fun setUpViews() {
-        binding.rvUsers.adapter = UsersAdapter()
-    }
-
-    override fun onResume() {
-        super.onResume()
         viewModel.fetchUsers()
+    }
+
+    private fun setUpViews() = with(binding) {
+
+        rvUsers.adapter = UsersAdapter()
+        srlUsers.setOnRefreshListener {
+            viewModel.fetchUsers(forceRefresh = true)
+            srlUsers.isRefreshing = false
+        }
+
     }
 
     private fun initViewModel() {

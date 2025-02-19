@@ -1,8 +1,8 @@
-package com.picpay.desafio.android.data.repository
+package com.picpay.desafio.android.data.source.remote.repository
 
 import com.picpay.desafio.android.core.extensions.async
 import com.picpay.desafio.android.data.source.remote.PicPayService
-import com.picpay.desafio.android.data.source.remote.entity.UserResponse
+import com.picpay.desafio.android.data.source.remote.response.UserResponse
 import com.picpay.desafio.android.domain.mapper.DomainMapper
 import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.domain.repository.UserRepository

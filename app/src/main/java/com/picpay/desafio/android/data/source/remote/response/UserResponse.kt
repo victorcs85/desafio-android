@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.data.source.remote.entity
+package com.picpay.desafio.android.data.source.remote.response
 
 import com.squareup.moshi.Json
 
