@@ -24,8 +24,10 @@ class UserRepositoryImpl(
         }
 
         val apiUsers = service.getUsers().distinct()
-        userDao.clearUsers()
-        userDao.insertUsers(apiUsers.map { it.toEntity() })
+        userDao.run {
+            clearUsers()
+            insertUsers(apiUsers.map { it.toEntity() })
+        }
         remoteMapper.toDomain(apiUsers)
     }
 }

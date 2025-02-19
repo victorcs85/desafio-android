@@ -35,6 +35,9 @@ buildscript {
         glide_version = "5.0.0-rc01"
         room_version = "2.6.1"
         swiperefreshlayout_version = "1.1.0"
+        test_rules_version = "1.6.1"
+        test_runner_version = "1.6.2"
+        mockk_version = "1.13.16"
     }
 
     repositories {

@@ -8,9 +8,14 @@ import com.picpay.desafio.android.domain.model.User
 class UserMapper : DomainMapper<UserEntity, User> {
 
     override fun toDomain(from: UserEntity) = with(from) {
-        User(id.toString(), name, username.toInt(), img)
+        User(id = id, name = name, username = username, img = img)
     }
 }
 
 fun UserResponse.toEntity() =
-    UserEntity(id ?: 0, name.orEmpty(), username.orEmpty(), img.orEmpty())
+    UserEntity(
+        id = id ?: 0,
+        name = name.orEmpty(),
+        username = username.orEmpty(),
+        img = img.orEmpty()
+    )
