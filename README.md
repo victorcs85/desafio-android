@@ -24,7 +24,7 @@ Ps.: Fique à vontade para editar o projeto inteiro, organização de pastas e m
 
 # Solução
 
-<img src="https://github.com/mobilepicpay/desafio-android/blob/master/solucao_desafio_android_picpay.gif" width="300"/>
+<img src="https://github.com/victorcs85/desafio-android/blob/feature/desafio-victor/solucao_desafio_android_picpay.gif" width="300"/>
 
 ## Passos iniciais
 
