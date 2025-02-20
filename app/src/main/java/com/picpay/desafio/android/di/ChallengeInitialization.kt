@@ -2,6 +2,8 @@ package com.picpay.desafio.android.di
 
 import androidx.room.Room
 import com.picpay.desafio.android.core.constants.API_URL
+import com.picpay.desafio.android.core.constants.LOCAL_SOURCE
+import com.picpay.desafio.android.core.constants.REMOTE_SOURCE
 import com.picpay.desafio.android.core.db.ChallengeAppDatabase
 import com.picpay.desafio.android.data.source.local.entity.UserEntity
 import com.picpay.desafio.android.data.source.remote.PicPayService
@@ -22,8 +24,6 @@ import com.picpay.desafio.android.data.source.remote.mapper.UserMapper as Remote
 import com.picpay.desafio.android.data.source.remote.repository.UserRepositoryImpl as RemoteUserRepositoryImpl
 
 private const val CHALLENGE_APP_DATABASE = "challenge_app_database"
-private const val LOCAL_SOURCE = "local"
-private const val REMOTE_SOURCE = "remote"
 private const val LOCAL_MAPPER = "local mapper"
 private const val REMOTE_MAPPER = "remote mapper"
 

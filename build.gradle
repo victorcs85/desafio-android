@@ -38,6 +38,9 @@ buildscript {
         test_rules_version = "1.6.1"
         test_runner_version = "1.6.2"
         mockk_version = "1.13.16"
+        mockk_android_version = "1.12.3"
+        uiautomator_version = "2.3.0"
+        androidx_junit_version = "1.2.1"
     }
 
     repositories {
