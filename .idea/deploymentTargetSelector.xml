@@ -11,6 +11,9 @@
       <SelectionState runConfigName="givenNoUsers_whenLoadMainActivity_thenShowEmptyState()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="givenUsers_whenRotateDeviceScreen_thenShowUsersListSuccessfully()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>

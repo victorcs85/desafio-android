@@ -1,13 +1,12 @@
 package com.picpay.desafio.android.presentation.ui.users
 
-import androidx.test.filters.MediumTest
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import com.picpay.desafio.android.core.DisableAnimationsRule
 import com.picpay.desafio.android.core.KoinRuleHelper
 import com.picpay.desafio.android.di.ModuleInitializer
 import com.picpay.desafio.android.di.repositoryMockModules
 import com.picpay.desafio.android.di.viewModelMockModules
-import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
