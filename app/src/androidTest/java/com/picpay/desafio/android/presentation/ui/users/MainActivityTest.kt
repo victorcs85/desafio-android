@@ -53,6 +53,7 @@ class MainActivityTest {
             launchActivity()
         } actions {
             rotateScreen(ScreenPosition.LANDSCAPE)
+            rotateScreen(ScreenPosition.PORTRAIT)
         } verify {
             checkNameUserDisplayed()
         }
