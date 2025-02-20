@@ -41,26 +41,26 @@ Ps.: Fique à vontade para editar o projeto inteiro, organização de pastas e m
 
 ## Premissas
 - Em mudanças de configuração o aplicativo perde o estado da tela. Gostaríamos que o mesmo fosse mantido.
-  [x] Implementado ViewModel para manter o estado da tela.
+  **[x] Implementado ViewModel para manter o estado da tela.**
 
 - Nossos relatórios de crash têm mostrado alguns crashes relacionados a campos que não deveriam ser nulos sendo nulos e gerenciamento de lifecycle. Gostaríamos que fossem corrigidos.
-  [x] Implementado LiveData para observar o ciclo de vida dos dados.
+  **[x] Implementado LiveData para observar o ciclo de vida dos dados.**
 
 - Gostaríamos de cachear os dados retornados pelo servidor.
-  [x] Implementado cache com Room.
+  **[x] Implementado cache com Room.**
 
 - Haverá mudanças na lógica de negócios e gostaríamos que a arquitetura reaja bem a isso.
-  [x] Implementado Repository Pattern.
-  [x] Implementado Clean Architecture em 3 camadas (data, domain e presentation).
+  **[x] Implementado Repository Pattern.
+  [x] Implementado Clean Architecture em 3 camadas (data, domain e presentation).**
 
 - Haverá mudanças na lógica de apresentação. Gostaríamos que a arquitetura reaja bem a isso.
-  [x] Implementado MVVM.
+  **[x] Implementado MVVM.
   [x] Implementado ViewBinding.
-  [x] Implementado LiveData.
+  [x] Implementado LiveData.**
 
 - Com um grande número de desenvolvedores e uma quantidade grande de mudanças ocorrendo testes automatizados são essenciais.
   - Gostaríamos de ter testes unitários testando nossa lógica de apresentação, negócios e dados independentemente, visto que tanto a escrita quanto execução dos mesmos são rápidas.
-    [x] Implementado testes unitários em repositories e viewmodel.
+    **[x] Implementado testes unitários em repositories e viewmodel.**
 
   - Por outro lado, testes unitários rodam em um ambiente de execução diferenciado e são menos fiéis ao dia-a-dia de nossos usuários, então testes instrumentados também são importantes.
-    [x] Implementado testes instrumentados na MainActivity.
+    **[x] Implementado testes instrumentados na MainActivity.**
