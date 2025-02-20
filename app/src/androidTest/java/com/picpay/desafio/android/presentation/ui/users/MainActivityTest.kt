@@ -6,6 +6,7 @@ import com.picpay.desafio.android.core.DisableAnimationsRule
 import com.picpay.desafio.android.core.KoinRuleHelper
 import com.picpay.desafio.android.di.ModuleInitializer
 import com.picpay.desafio.android.di.repositoryMockModules
+import com.picpay.desafio.android.di.viewModelMockModules
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
@@ -21,6 +22,7 @@ class MainActivityTest {
     @get:Rule
     val koinRule = KoinRuleHelper(
         ModuleInitializer.modules +
+                viewModelMockModules +
                 repositoryMockModules
     )
 
@@ -31,6 +33,28 @@ class MainActivityTest {
             launchActivity()
         } verify {
             checkScreenTitleDisplayed()
+            checkNameUserDisplayed()
+        }
+    }
+
+    @Test
+    fun givenNoUsers_whenLoadMainActivity_thenShowEmptyState() {
+        withMainActivity {
+            mockUsers(hasRemoteData = false, hasLocalData = false)
+            launchActivity()
+        } verify {
+            checkEmptyStateDisplayed()
+        }
+    }
+
+    @Test
+    fun givenUsers_whenRotateDeviceScreen_thenShowUsersListSuccessfully() {
+        withMainActivity {
+            mockUsers()
+            launchActivity()
+        } actions {
+            rotateScreen(ScreenPosition.LANDSCAPE)
+        } verify {
             checkNameUserDisplayed()
         }
     }
