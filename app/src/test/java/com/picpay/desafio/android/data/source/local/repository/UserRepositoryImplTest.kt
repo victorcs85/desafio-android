@@ -2,7 +2,7 @@ package com.picpay.desafio.android.data.source.local.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
-import br.com.mantunes.applembrei.base.CoroutinesTestRule
+import com.picpay.desafio.android.base.CoroutinesTestRule
 import com.picpay.desafio.android.data.source.local.dao.UserDao
 import com.picpay.desafio.android.data.source.local.entity.UserEntity
 import com.picpay.desafio.android.data.source.remote.PicPayService

@@ -1,4 +1,4 @@
-package br.com.mantunes.applembrei.base
+package com.picpay.desafio.android.base
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

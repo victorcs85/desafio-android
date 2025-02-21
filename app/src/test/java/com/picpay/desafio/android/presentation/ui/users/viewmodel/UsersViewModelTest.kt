@@ -2,7 +2,7 @@ package com.picpay.desafio.android.presentation.ui.users.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
-import br.com.mantunes.applembrei.base.CoroutinesTestRule
+import com.picpay.desafio.android.base.CoroutinesTestRule
 import com.picpay.desafio.android.base.test
 import com.picpay.desafio.android.di.ChallengeInitialization
 import com.picpay.desafio.android.domain.model.Response
