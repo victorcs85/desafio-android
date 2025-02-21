@@ -29,7 +29,7 @@ class UsersViewModel(
         launch(
             block = {
 
-                val users = if(forceRefresh) {
+                val users = if (forceRefresh) {
                     remoteRepository.getUsers()
                 } else {
                     localRepository.getUsers()

@@ -61,7 +61,7 @@ class MainActivityRobot : KoinTest {
     //region Actions
     fun rotateScreen(screenPosition: ScreenPosition = ScreenPosition.PORTRAIT) {
         val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-        when(screenPosition) {
+        when (screenPosition) {
             ScreenPosition.PORTRAIT -> device.setOrientationNatural()
             ScreenPosition.LANDSCAPE -> device.setOrientationLeft()
         }

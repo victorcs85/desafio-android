@@ -10,7 +10,7 @@ import com.picpay.desafio.android.domain.repository.UserRepository
 class UserRepositoryImpl(
     private val service: PicPayService,
     private val mapper: DomainMapper<UserResponse, User>
-): UserRepository {
+) : UserRepository {
 
     override suspend fun getUsers(): List<User> = async {
         mapper.toDomain(service.getUsers().distinct())

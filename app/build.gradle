@@ -28,8 +28,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
@@ -111,7 +111,7 @@ dependencies {
     testImplementation "io.insert-koin:koin-android-test"
 
     androidTestImplementation "androidx.test:runner:$test_runner_version"
-    androidTestImplementation"io.mockk:mockk-android:$mockk_android_version"
+    androidTestImplementation "io.mockk:mockk-android:$mockk_android_version"
     androidTestImplementation "io.insert-koin:koin-test:$koin_version"
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
 

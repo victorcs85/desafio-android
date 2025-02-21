@@ -15,5 +15,5 @@ val repositoryMockModules = module(override = true) {
 }
 
 val viewModelMockModules = module(override = true) {
-    viewModel { UsersViewModel(get(named(REMOTE_SOURCE)), get(named(LOCAL_SOURCE)) ) }
+    viewModel { UsersViewModel(get(named(REMOTE_SOURCE)), get(named(LOCAL_SOURCE))) }
 }
