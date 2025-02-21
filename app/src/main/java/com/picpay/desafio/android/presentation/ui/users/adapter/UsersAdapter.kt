@@ -2,7 +2,6 @@ package com.picpay.desafio.android.presentation.ui.users.adapter
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.picpay.desafio.android.core.extensions.gone
 import com.picpay.desafio.android.core.extensions.loadImage
+import com.picpay.desafio.android.core.extensions.visible
 import com.picpay.desafio.android.databinding.UserItemBinding
 import com.picpay.desafio.android.domain.model.User
 
@@ -43,6 +44,8 @@ class UsersAdapter : ListAdapter<User, UsersAdapter.UserViewHolder>(DiffCallback
         fun bind(user: User) = with(user) {
             userItemName.text = name
             userItemUsername.text = username
+            progressBar.visible()
+
             userItemPicture.loadImage(
                 imageUrl = img,
                 forceCache = true,
@@ -54,7 +57,7 @@ class UsersAdapter : ListAdapter<User, UsersAdapter.UserViewHolder>(DiffCallback
                         target: Target<Drawable>,
                         isFirstResource: Boolean
                     ): Boolean {
-                        progressBar.visibility = View.GONE
+                        progressBar.gone()
                         return false
                     }
 
@@ -65,7 +68,7 @@ class UsersAdapter : ListAdapter<User, UsersAdapter.UserViewHolder>(DiffCallback
                         dataSource: com.bumptech.glide.load.DataSource,
                         isFirstResource: Boolean
                     ): Boolean {
-                        progressBar.visibility = View.GONE
+                        progressBar.gone()
                         return false
                     }
                 })

@@ -24,7 +24,10 @@ fun AppCompatImageView.loadImage(
         error(R.drawable.ic_round_account_circle).transform(FitCenter())
     }
 
-    val cacheStrategy = if (forceCache) DiskCacheStrategy.ALL else DiskCacheStrategy.AUTOMATIC
+    val cacheStrategy = if (forceCache)
+        DiskCacheStrategy.ALL
+    else
+        DiskCacheStrategy.AUTOMATIC
 
     if (transformCircle) {
         Glide.with(this.context)

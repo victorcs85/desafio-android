@@ -45,7 +45,12 @@ class UserRepositoryLocalTest : KoinTest {
 
     @Before
     fun setUp() {
-        repository = UserRepositoryImpl(service, localMapper, remoteMapper, userDao)
+        repository = UserRepositoryImpl(
+            service,
+            localMapper,
+            remoteMapper,
+            userDao
+        )
     }
 
     @Test

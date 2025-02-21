@@ -60,8 +60,6 @@ class ChallengeInitialization : ModuleInitialization() {
                 userDao = get()
             )
         }
-
-
     }
     //endregion
 

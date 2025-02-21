@@ -18,7 +18,9 @@ object RetrofitConfig : KoinComponent {
             .client(
                 okHttpClient
             )
-            .addConverterFactory(MoshiConverterFactory.create(MoshiBuilder.create()))
+            .addConverterFactory(
+                MoshiConverterFactory.create(MoshiBuilder.create())
+            )
             .build()
             .create(service)
     }
