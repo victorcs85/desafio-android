@@ -6,3 +6,4 @@ const val LOCAL_SOURCE = "local_source"
 const val REMOTE_SOURCE = "remote_source"
 
 const val NETWORK_ERROR = "Sem conexão. Verifique e tente novamente."
+const val UNKNOWN_ERROR = "Ocorreu um erro. Tente novamente mais tarde."
