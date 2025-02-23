@@ -6,9 +6,9 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
 
-class ConnectivityInterceptor: Interceptor {
+class ConnectivityInterceptor(private val wifiService: WifiService) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        if (WifiService.instance.isOnline().not()) {
+        if (wifiService.isOnline().not()) {
             throw IOException(NETWORK_ERROR)
         } else {
             return chain.proceed(chain.request())

@@ -5,18 +5,10 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.wifi.WifiManager
 
-class WifiService {
-    private lateinit var wifiManager: WifiManager
-    private lateinit var connectivityManager: ConnectivityManager
+class WifiService(private val context: Context) {
 
-    companion object {
-        val instance = WifiService()
-    }
-
-    fun initializeWithApplicationContext (context: Context) {
-        wifiManager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    }
+    private val wifiManager: WifiManager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
+    private val connectivityManager: ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     fun isOnline(): Boolean {
         val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
