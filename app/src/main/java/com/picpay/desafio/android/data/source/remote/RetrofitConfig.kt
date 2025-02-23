@@ -1,5 +1,6 @@
 package com.picpay.desafio.android.data.source.remote
 
+import com.picpay.desafio.android.core.interceptor.ConnectivityInterceptor
 import okhttp3.OkHttpClient
 import org.koin.core.component.KoinComponent
 import retrofit2.Retrofit
@@ -12,6 +13,7 @@ object RetrofitConfig : KoinComponent {
         baseUrl: String
     ): T {
         val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(ConnectivityInterceptor())
             .build()
         return Retrofit.Builder()
             .baseUrl(baseUrl)
