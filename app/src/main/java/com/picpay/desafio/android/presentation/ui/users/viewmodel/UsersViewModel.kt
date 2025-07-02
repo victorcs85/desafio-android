@@ -12,8 +12,7 @@ import com.picpay.desafio.android.domain.repository.UserRepository
 typealias UsersResponse = Response<List<User>>
 
 class UsersViewModel(
-    private val remoteRepository: UserRepository,
-    private val localRepository: UserRepository
+    private val remoteRepository: UserRepository
 ) : BaseViewModel() {
 
     private val _users = MutableLiveData<UsersResponse>(Response.Idle)
@@ -29,11 +28,7 @@ class UsersViewModel(
         launch(
             block = {
 
-                val users = if (forceRefresh) {
-                    remoteRepository.getUsers()
-                } else {
-                    localRepository.getUsers()
-                }
+                val users = remoteRepository.getUsers()
 
                 _users.postValue(users.asSuccessResponse())
 

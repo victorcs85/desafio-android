@@ -9,7 +9,6 @@ import com.picpay.desafio.android.domain.model.Response
 import com.picpay.desafio.android.domain.repository.UserRepository
 import com.picpay.desafio.android.shared.test.DataMockTest
 import io.mockk.coEvery
-import io.mockk.coVerify
 import io.mockk.confirmVerified
 import io.mockk.mockk
 import io.mockk.verifySequence
@@ -30,7 +29,6 @@ import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
 import org.mockito.junit.MockitoJUnitRunner
 
-private const val LOCAL_SOURCE = "local"
 private const val REMOTE_SOURCE = "remote"
 private const val ERROR = "Ocorreu um erro. Tente novamente."
 
@@ -53,11 +51,9 @@ class UsersViewModelTest : KoinTest {
             modules = ChallengeInitialization().init() +
                     module {
                         single(named(REMOTE_SOURCE)) { remoteRepository }
-                        single(named(LOCAL_SOURCE)) { localRepository }
                         single {
                             UsersViewModel(
-                                remoteRepository = get(named(REMOTE_SOURCE)),
-                                localRepository = get(named(LOCAL_SOURCE))
+                                remoteRepository = get(named(REMOTE_SOURCE))
                             )
                         }
                     }
@@ -65,13 +61,12 @@ class UsersViewModelTest : KoinTest {
     }
 
     private val remoteRepository: UserRepository = mockk()
-    private val localRepository: UserRepository = mockk()
 
     private lateinit var usersViewModel: UsersViewModel
 
     @Before
     fun setUp() {
-        usersViewModel = UsersViewModel(remoteRepository, localRepository)
+        usersViewModel = UsersViewModel(remoteRepository)
     }
 
     @After
@@ -82,7 +77,6 @@ class UsersViewModelTest : KoinTest {
     @Test
     fun givenUsersScreen_whenFetchUsers_thenReturnSuccessfully() = runTest {
         val mockUsersResponse = DataMockTest.USERS_MOCK
-        coEvery { localRepository.getUsers() } returns mockUsersResponse
 
         val usersObserver = usersViewModel.users.test()
 
@@ -100,7 +94,6 @@ class UsersViewModelTest : KoinTest {
 
     @Test
     fun givenUsersScreen_whenFetchUsersWithError_thenReturnError() = runTest {
-        coEvery { localRepository.getUsers() } throws IllegalArgumentException(ERROR)
 
         val usersObserver = usersViewModel.users.test()
 
@@ -114,8 +107,6 @@ class UsersViewModelTest : KoinTest {
             }
         }
         confirmVerified(usersObserver)
-
-        coVerify { localRepository.getUsers() }
     }
 
     @Test

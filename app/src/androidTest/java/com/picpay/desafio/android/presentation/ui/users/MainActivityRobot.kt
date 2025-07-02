@@ -6,7 +6,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.picpay.desafio.android.R
-import com.picpay.desafio.android.core.constants.LOCAL_SOURCE
 import com.picpay.desafio.android.core.constants.REMOTE_SOURCE
 import com.picpay.desafio.android.domain.repository.UserRepository
 import com.picpay.desafio.android.extensions.checkNumberItems
@@ -26,22 +25,14 @@ fun MainActivityTest.withMainActivity(func: MainActivityRobot.() -> Unit) =
 
 class MainActivityRobot : KoinTest {
 
-    private val localRepository by inject<UserRepository>(named(LOCAL_SOURCE))
     private val remoteRepository by inject<UserRepository>(named(REMOTE_SOURCE))
 
     //region Mocks
     fun mockUsers(
         hasRemoteData: Boolean = true,
-        hasLocalData: Boolean = true
     ) {
         coEvery { remoteRepository.getUsers() } returns
                 if (hasRemoteData)
-                    PresentationDataMock.USERS_MOCK
-                else
-                    emptyList()
-
-        coEvery { localRepository.getUsers() } returns
-                if (hasLocalData)
                     PresentationDataMock.USERS_MOCK
                 else
                     emptyList()

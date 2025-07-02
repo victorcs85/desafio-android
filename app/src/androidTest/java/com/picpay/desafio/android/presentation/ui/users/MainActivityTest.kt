@@ -39,7 +39,7 @@ class MainActivityTest {
     @Test
     fun givenNoUsers_whenLoadMainActivity_thenShowEmptyState() {
         withMainActivity {
-            mockUsers(hasRemoteData = false, hasLocalData = false)
+            mockUsers(hasRemoteData = false)
             launchActivity()
         } verify {
             checkEmptyStateDisplayed()

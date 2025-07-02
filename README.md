@@ -62,7 +62,7 @@ dependências utilizadas
   **[x] Implementado LiveData para observar o ciclo de vida dos dados.**
 
 - Gostaríamos de cachear os dados retornados pelo servidor.
-  **[x] Implementado cache com Room.**
+  **[x] Implementado cache.**
 
 - Haverá mudanças na lógica de negócios e gostaríamos que a arquitetura reaja bem a isso.
   **[x] Implementado Repository Pattern.
@@ -78,6 +78,7 @@ dependências utilizadas
     - Gostaríamos de ter testes unitários testando nossa lógica de apresentação, negócios e dados
       independentemente, visto que tanto a escrita quanto execução dos mesmos são rápidas.
       **[x] Implementado testes unitários em repositories e viewmodel.**
+      **[x] Implementado workflow com GitHub Actions para abertura de PR e release (distribuição na loja).**
 
     - Por outro lado, testes unitários rodam em um ambiente de execução diferenciado e são menos
       fiéis ao dia-a-dia de nossos usuários, então testes instrumentados também são importantes.
