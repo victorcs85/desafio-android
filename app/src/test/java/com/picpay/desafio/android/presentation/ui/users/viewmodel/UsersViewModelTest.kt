@@ -79,6 +79,7 @@ class UsersViewModelTest : KoinTest {
         val mockUsersResponse = DataMockTest.USERS_MOCK
 
         val usersObserver = usersViewModel.users.test()
+        coEvery { remoteRepository.getUsers() } returns mockUsersResponse
 
         usersViewModel.fetchUsers()
 
@@ -96,6 +97,8 @@ class UsersViewModelTest : KoinTest {
     fun givenUsersScreen_whenFetchUsersWithError_thenReturnError() = runTest {
 
         val usersObserver = usersViewModel.users.test()
+
+        coEvery { remoteRepository.getUsers() } throws Exception(ERROR)
 
         usersViewModel.fetchUsers()
 
