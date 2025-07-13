@@ -1,26 +1,22 @@
 package com.picpay.desafio.android.di
 
 import com.picpay.desafio.android.core.constants.API_URL
-import com.picpay.desafio.android.core.constants.REMOTE_SOURCE
 import com.picpay.desafio.android.core.interceptor.ConnectivityInterceptor
 import com.picpay.desafio.android.core.services.WifiService
 import com.picpay.desafio.android.data.source.remote.PicPayService
 import com.picpay.desafio.android.data.source.remote.RetrofitConfig
-import com.picpay.desafio.android.data.source.remote.response.UserResponse
+import com.picpay.desafio.android.data.source.remote.dto.UserDto
 import com.picpay.desafio.android.domain.mapper.DomainMapper
 import com.picpay.desafio.android.domain.model.User
-import com.picpay.desafio.android.domain.repository.UserRepository
-import com.picpay.desafio.android.presentation.ui.users.viewmodel.UsersViewModel
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
+import com.picpay.desafio.android.domain.repository.IUserRepository
+import com.picpay.desafio.android.domain.usecases.GetUsersUseCaseImpl
+import com.picpay.desafio.android.domain.usecases.IGetUsersUseCase
+import com.picpay.desafio.android.presentation.features.users.UsersViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
-import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import org.koin.dsl.module
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import com.picpay.desafio.android.data.source.remote.mapper.UserMapper as RemoteUserMapper
 import com.picpay.desafio.android.data.source.remote.repository.UserRepositoryImpl as RemoteUserRepositoryImpl
 
@@ -36,18 +32,26 @@ class ChallengeInitialization : ModuleInitialization() {
 
     //region Repositories
     private val repositoriesModule = module {
-        single<UserRepository>(named(REMOTE_SOURCE)) {
+        single<IUserRepository> {
             RemoteUserRepositoryImpl(
                 service = get(),
-                mapper = get(named(REMOTE_MAPPER))
+                mapper = get()
             )
+        }
+    }
+    //endregion
+
+    //region Use Cases
+    private val useCaseModule = module {
+        single<IGetUsersUseCase> {
+            GetUsersUseCaseImpl(repository = get())
         }
     }
     //endregion
 
     //region Mappers
     private val mappersModule = module {
-        single<DomainMapper<UserResponse, User>>(named(REMOTE_MAPPER)) { RemoteUserMapper() }
+        single<DomainMapper<UserDto, User>> { RemoteUserMapper() }
     }
     //endregion
 
@@ -55,7 +59,7 @@ class ChallengeInitialization : ModuleInitialization() {
     private val viewModelModule = module {
         viewModel {
             UsersViewModel(
-                remoteRepository = get(named(REMOTE_SOURCE))
+                useCase = get()
             )
         }
     }
@@ -66,9 +70,9 @@ class ChallengeInitialization : ModuleInitialization() {
         repositoriesModule,
         mappersModule,
         viewModelModule,
-        networkModule,
         serviceModule,
-        interceptorModule
+        interceptorModule,
+        useCaseModule
     )
 
     //region Network
@@ -78,14 +82,6 @@ class ChallengeInitialization : ModuleInitialization() {
         wifiService = get(),
         context = androidContext()
     )
-
-    private val networkModule = module {
-        single { OkHttpClient.Builder().addInterceptor(get<Interceptor>()).build() }
-        single {
-            Retrofit.Builder().client(get()).addConverterFactory(MoshiConverterFactory.create())
-                .build()
-        }
-    }
 
     private val serviceModule = module {
         single { WifiService(androidContext()) }

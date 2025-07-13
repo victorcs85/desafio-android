@@ -8,4 +8,9 @@
     <string name="network_description_error">Não foi possível carregar os dados. Verifique sua conexão e tente novamente.</string>
     <string name="try_again">Tentar novamente</string>
 
+    <string name="semantic_loading">Carregando os dados.</string>
+    <string name="semantic_button">Botão %1$s</string>
+    <string name="no_data_available">Não foram localizados dados para amostragem.</string>
+    <string name="reload">Recarregar</string>
+
 </resources>

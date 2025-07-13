@@ -1,6 +1,6 @@
 package com.picpay.desafio.android.shared.test
 
-import com.picpay.desafio.android.data.source.remote.response.UserResponse
+import com.picpay.desafio.android.data.source.remote.dto.UserDto
 import com.picpay.desafio.android.domain.model.User
 
 private const val ID_USER = 1001
@@ -20,7 +20,7 @@ object DataMockTest {
     )
 
     val USERS_RESPONSE_MOCK = listOf(
-        UserResponse(
+        UserDto(
             id = ID_USER,
             name = NAME_USER,
             img = IMG_USER,

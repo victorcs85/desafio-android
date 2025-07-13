@@ -1,11 +1,13 @@
 package com.picpay.desafio.android.data.source.remote
 
 import android.content.Context
+import com.picpay.desafio.android.BuildConfig
 import com.picpay.desafio.android.core.interceptor.CacheControlInterceptor
 import com.picpay.desafio.android.core.interceptor.ConnectivityInterceptor
 import com.picpay.desafio.android.core.services.WifiService
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
@@ -21,6 +23,8 @@ object RetrofitConfig {
     fun <T> create(service: Class<T>, baseUrl: String, wifiService: WifiService, context: Context): T {
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(CacheControlInterceptor(wifiService))
+            .addInterceptor(ConnectivityInterceptor(wifiService))
+            .addInterceptor(getHttpLogging())
             .connectTimeout(HUNDRED, TimeUnit.SECONDS)
             .readTimeout(HUNDRED, TimeUnit.SECONDS)
             .writeTimeout(ONE_HUNDRED_AND_TWENTY, TimeUnit.SECONDS)
@@ -30,7 +34,6 @@ object RetrofitConfig {
                     CACHE_MAX_SIZE,
                 ),
             )
-            .addInterceptor(ConnectivityInterceptor(wifiService))
             .build()
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -39,4 +42,13 @@ object RetrofitConfig {
             .build()
             .create(service)
     }
+
+    private fun getHttpLogging(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor().setLevel(
+            if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            },
+        )
 }

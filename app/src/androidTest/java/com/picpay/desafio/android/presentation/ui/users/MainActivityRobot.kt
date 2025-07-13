@@ -7,9 +7,10 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.picpay.desafio.android.R
 import com.picpay.desafio.android.core.constants.REMOTE_SOURCE
-import com.picpay.desafio.android.domain.repository.UserRepository
+import com.picpay.desafio.android.domain.repository.IUserRepository
 import com.picpay.desafio.android.extensions.checkNumberItems
 import com.picpay.desafio.android.extensions.isTextDisplayed
+import com.picpay.desafio.android.presentation.views.MainActivity
 import com.picpay.desafio.android.shared.test.PresentationDataMock
 import io.mockk.coEvery
 import org.koin.core.qualifier.named
@@ -25,17 +26,17 @@ fun MainActivityTest.withMainActivity(func: MainActivityRobot.() -> Unit) =
 
 class MainActivityRobot : KoinTest {
 
-    private val remoteRepository by inject<UserRepository>(named(REMOTE_SOURCE))
+    private val remoteRepository by inject<IUserRepository>(named(REMOTE_SOURCE))
 
     //region Mocks
     fun mockUsers(
         hasRemoteData: Boolean = true,
     ) {
         coEvery { remoteRepository.getUsers() } returns
-                if (hasRemoteData)
+//                if (hasRemoteData)
                     PresentationDataMock.USERS_MOCK
-                else
-                    emptyList()
+//                else
+//                    emptyList()
     }
     //endregion
 

@@ -5,4 +5,4 @@ const val API_URL = "https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/"
 const val REMOTE_SOURCE = "remote_source"
 
 const val NETWORK_ERROR = "Sem conexão. Verifique e tente novamente."
-const val UNKNOWN_ERROR = "Ocorreu um erro. Tente novamente mais tarde."
+const val GENERIC_MESSAGE_ERROR = "Ocorreu um erro ao buscar os dados!"

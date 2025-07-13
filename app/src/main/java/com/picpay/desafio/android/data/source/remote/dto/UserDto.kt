@@ -1,8 +1,8 @@
-package com.picpay.desafio.android.data.source.remote.response
+package com.picpay.desafio.android.data.source.remote.dto
 
 import com.squareup.moshi.Json
 
-data class UserResponse(
+data class UserDto(
     @Json(name = "img") val img: String?,
     @Json(name = "name") val name: String?,
     @Json(name = "id") val id: Int?,
