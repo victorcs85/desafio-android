@@ -30,7 +30,10 @@ fun ShowErrorMessage(
     buttonLabel: String?,
     modifier: Modifier?,
 ) {
-    Box(modifier = Modifier.fillMaxSize().padding(16.dp), contentAlignment = Alignment.Center) {
+    Box(
+        modifier = Modifier.fillMaxSize().padding(16.dp),
+        contentAlignment = Alignment.Center
+    ) {
         Column {
             Text(
                 text = errorMessage,
@@ -45,6 +48,7 @@ fun ShowErrorMessage(
             )
             buttonLabel?.let {
                 val contentButtonDescription = stringResource(R.string.semantic_button, buttonLabel)
+
                 ActionButton(
                     modifier?.semantics { contentDescription = contentButtonDescription },
                     buttonAction,
@@ -58,5 +62,10 @@ fun ShowErrorMessage(
 @Preview
 @Composable
 fun ShowErrorMessagePreview() {
-    ShowErrorMessage("No data available", modifier = Modifier.fillMaxWidth(), buttonLabel = "Retry", buttonAction = {})
+    ShowErrorMessage(
+        stringResource(R.string.no_data_available),
+        modifier = Modifier.fillMaxWidth(),
+        buttonLabel = stringResource(R.string.reload),
+        buttonAction = {}
+    )
 }

@@ -4,13 +4,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Color(0xFFBB86FC),
-    onPrimary = Color.Black,
-    background = Color.Black,
-    onBackground = Color.White
+    primary = PINK_COLOR,
+    onPrimary = BLACK_APP_COLOR,
+    background = BLACK_APP_COLOR,
+    onBackground = WHITE_COLOR
 )
 
 @Composable

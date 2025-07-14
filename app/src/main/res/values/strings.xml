@@ -10,7 +10,11 @@
 
     <string name="semantic_loading">Carregando os dados.</string>
     <string name="semantic_button">Botão %1$s</string>
+    <string name="semantic_users">Lista de Usuários</string>
+    <string name="semantic_user_name">Contato de %1$s</string>
+    <string name="semantic_user_image">Foto de perfil de %1$s</string>
     <string name="no_data_available">Não foram localizados dados para amostragem.</string>
     <string name="reload">Recarregar</string>
+    <string name="contacts_title">Contatos</string>
 
 </resources>

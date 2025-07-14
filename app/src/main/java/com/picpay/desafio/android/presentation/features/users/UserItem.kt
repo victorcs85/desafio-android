@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,35 +30,43 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.picpay.desafio.android.R
 import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.presentation.theme.AppTheme
 import com.picpay.desafio.android.presentation.theme.BLACK_APP_COLOR
 import com.picpay.desafio.android.presentation.theme.GREEN_COLOR
 
+private const val TAG_TEST_USER_ITEM = "UserItem_"
+private const val TAG_TEST_USER_NAME = "UserName_"
+private const val TAG_TEST_USER_USERNAME = "UserUsername_"
+private const val TAG_TEST_USER_IMAGE = "UserImage_"
+
 @Composable
 fun UserItem(user: User, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    val userNameSemantic = stringResource(R.string.semantic_user_name, user.name)
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .padding(top = 8.dp, bottom = 8.dp, end = 16.dp)
             .fillMaxWidth()
             .semantics() {
-                contentDescription = "Contato de ${user.name}"
+                contentDescription = userNameSemantic
             }
-            .testTag("UserItem_${user.id}")
+            .testTag("$TAG_TEST_USER_ITEM${user.id}")
     ) {
         UserImage(user)
         Spacer(modifier = Modifier.width(16.dp))
         Column {
             Text(
-                text = "@${user.username}",
+                text = user.username,
                 style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
-                modifier = Modifier.testTag("UserUsername_${user.id}")
+                modifier = Modifier.testTag("$TAG_TEST_USER_USERNAME${user.id}")
             )
             Text(
                 text = user.name,
                 style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray),
-                modifier = Modifier.testTag("UserName_${user.id}")
+                modifier = Modifier.testTag("$TAG_TEST_USER_NAME${user.id}")
             )
         }
     }
@@ -76,7 +85,7 @@ private fun UserImage(user: User) {
         modifier = Modifier
             .size(48.dp)
             .clip(CircleShape)
-            .testTag("UserImage_${user.id}"),
+            .testTag("$TAG_TEST_USER_IMAGE${user.id}"),
         contentAlignment = Alignment.Center
     ) {
         if (painter.state is AsyncImagePainter.State.Loading) {
@@ -89,7 +98,7 @@ private fun UserImage(user: User) {
 
         Image(
             painter = painter,
-            contentDescription = "Foto de perfil de ${user.name}",
+            contentDescription = stringResource(R.string.semantic_user_image, user.name),
             contentScale = ContentScale.Crop,
             modifier = Modifier.matchParentSize()
         )

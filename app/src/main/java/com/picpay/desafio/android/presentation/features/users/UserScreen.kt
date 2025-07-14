@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,11 +29,14 @@ import com.picpay.desafio.android.presentation.views.EmptyInfoListView
 import com.picpay.desafio.android.presentation.views.LoadingView
 import com.picpay.desafio.android.presentation.views.ShowErrorMessage
 
+private const val TAG_TEST_CONTACT_TITLE = "ContactTitle"
+
 @Composable
 fun UsersScreen(
     state: UsersScreenState,
     execute: (UsersIntent) -> Unit
 ) {
+    val semanticUsers = stringResource(R.string.semantic_users)
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
@@ -43,14 +46,14 @@ fun UsersScreen(
                 .background(BLACK_APP_COLOR)
                 .fillMaxSize()
                 .padding(top = 24.dp)
-                .semantics() { contentDescription = "Lista de Contatos" }
+                .semantics() { contentDescription = semanticUsers }
         ) {
             Text(
-                text = "Contatos",
-                style = MaterialTheme.typography.h4.copy(color = Color.White),
+                text = stringResource(R.string.contacts_title),
+                style = MaterialTheme.typography.headlineLarge.copy(color = Color.White),
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
-                    .testTag("ContactTitle"),
+                    .testTag(TAG_TEST_CONTACT_TITLE),
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(16.dp))
@@ -105,7 +108,9 @@ fun UsersScreenPreview_Loading() {
 @Preview(showBackground = true)
 @Composable
 fun UsersScreenPreview_Error() {
-    val state = UsersScreenState(errorMessage = "Erro ao carregar dados")
+    val state = UsersScreenState(
+        errorMessage = stringResource(R.string.error)
+    )
     AppTheme {
         UsersScreen(state = state, execute = {})
     }
@@ -124,11 +129,31 @@ fun UsersScreenPreview_Empty() {
 @Composable
 fun UsersScreenPreview_Success() {
     val users = listOf(
-        User("https://randomuser.me/api/portraits/men/1.jpg", "Eduardo Santos", 1, "eduardo.santos"),
-        User("https://randomuser.me/api/portraits/women/2.jpg", "Marina Coelho", 2, "marina.coelho"),
-        User("https://randomuser.me/api/portraits/women/3.jpg", "Márcia da Silva", 3, "marcia.silva"),
+        User(
+            "https://randomuser.me/api/portraits/men/1.jpg",
+            "Eduardo Santos",
+            1,
+            "eduardo.santos"
+        ),
+        User(
+            "https://randomuser.me/api/portraits/women/2.jpg",
+            "Marina Coelho",
+            2,
+            "marina.coelho"
+        ),
+        User(
+            "https://randomuser.me/api/portraits/women/3.jpg",
+            "Márcia da Silva",
+            3,
+            "marcia.silva"
+        ),
         User("https://randomuser.me/api/portraits/men/4.jpg", "Fabrício Val", 4, "fabricio.val"),
-        User("https://randomuser.me/api/portraits/women/5.jpg", "Júlia Magalhães", 5, "julia.magalhaes")
+        User(
+            "https://randomuser.me/api/portraits/women/5.jpg",
+            "Júlia Magalhães",
+            5,
+            "julia.magalhaes"
+        )
     )
     val state = UsersScreenState(users = users)
     AppTheme {

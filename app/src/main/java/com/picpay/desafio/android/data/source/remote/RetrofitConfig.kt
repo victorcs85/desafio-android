@@ -35,6 +35,7 @@ object RetrofitConfig {
                 ),
             )
             .build()
+
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)

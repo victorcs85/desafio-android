@@ -6,3 +6,5 @@ const val REMOTE_SOURCE = "remote_source"
 
 const val NETWORK_ERROR = "Sem conexão. Verifique e tente novamente."
 const val GENERIC_MESSAGE_ERROR = "Ocorreu um erro ao buscar os dados!"
+
+const val ZERO = 0

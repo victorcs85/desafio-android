@@ -40,6 +40,7 @@ fun EmptyInfoListView(buttonAction: () -> Unit, buttonLabel: String?, modifier: 
             )
             buttonLabel?.let {
                 val contentButtonDescription = stringResource(R.string.semantic_button, buttonLabel)
+
                 ActionButton(
                     modifier?.semantics { contentDescription = contentButtonDescription },
                     buttonAction,
@@ -53,5 +54,9 @@ fun EmptyInfoListView(buttonAction: () -> Unit, buttonLabel: String?, modifier: 
 @Preview
 @Composable
 fun ShowEmptyListPreview() {
-    EmptyInfoListView(modifier = Modifier.fillMaxWidth(), buttonAction = {}, buttonLabel = "Retry")
+    EmptyInfoListView(
+        modifier = Modifier.fillMaxWidth(),
+        buttonAction = {},
+        buttonLabel = stringResource(R.string.reload)
+    )
 }

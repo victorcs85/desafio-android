@@ -9,8 +9,8 @@ import com.picpay.desafio.android.data.source.remote.dto.UserDto
 import com.picpay.desafio.android.domain.mapper.DomainMapper
 import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.domain.repository.IUserRepository
-import com.picpay.desafio.android.domain.usecases.GetUsersUseCaseImpl
-import com.picpay.desafio.android.domain.usecases.IGetUsersUseCase
+import com.picpay.desafio.android.domain.usecases.FetchUsersUseCaseImpl
+import com.picpay.desafio.android.domain.usecases.IFetchUsersUseCase
 import com.picpay.desafio.android.presentation.features.users.UsersViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -19,8 +19,6 @@ import org.koin.core.scope.Scope
 import org.koin.dsl.module
 import com.picpay.desafio.android.data.source.remote.mapper.UserMapper as RemoteUserMapper
 import com.picpay.desafio.android.data.source.remote.repository.UserRepositoryImpl as RemoteUserRepositoryImpl
-
-private const val REMOTE_MAPPER = "remote mapper"
 
 class ChallengeInitialization : ModuleInitialization() {
 
@@ -43,8 +41,8 @@ class ChallengeInitialization : ModuleInitialization() {
 
     //region Use Cases
     private val useCaseModule = module {
-        single<IGetUsersUseCase> {
-            GetUsersUseCaseImpl(repository = get())
+        single<IFetchUsersUseCase> {
+            FetchUsersUseCaseImpl(repository = get())
         }
     }
     //endregion
@@ -65,16 +63,6 @@ class ChallengeInitialization : ModuleInitialization() {
     }
     //endregion
 
-    override fun init(): List<Module> = listOf(
-        dataSourceModule,
-        repositoriesModule,
-        mappersModule,
-        viewModelModule,
-        serviceModule,
-        interceptorModule,
-        useCaseModule
-    )
-
     //region Network
     private fun <T> Scope.retrofitConfig(service: Class<T>) = RetrofitConfig.create(
         service,
@@ -91,4 +79,14 @@ class ChallengeInitialization : ModuleInitialization() {
         single { ConnectivityInterceptor(get()) }
     }
     //endregion
+
+    override fun init(): List<Module> = listOf(
+        dataSourceModule,
+        repositoriesModule,
+        mappersModule,
+        viewModelModule,
+        serviceModule,
+        interceptorModule,
+        useCaseModule
+    )
 }

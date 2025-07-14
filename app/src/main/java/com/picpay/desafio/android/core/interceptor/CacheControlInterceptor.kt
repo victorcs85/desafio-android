@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit
 
 private const val CACHE_CONTROL = "Cache-Control"
 private const val MAX_DAYS = 10
-
 private const val MAX_STALE = 7
 
 class CacheControlInterceptor(private val wifiService: WifiService) : Interceptor {

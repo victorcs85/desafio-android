@@ -66,8 +66,8 @@ fun ActionButtonPreview() {
         Surface {
             ActionButton(
                 modifier = Modifier.padding(16.dp),
-                buttonLabel = "Recarregar",
-                buttonAction = { /* preview */ }
+                buttonLabel = stringResource(R.string.reload),
+                buttonAction = { }
             )
         }
     }

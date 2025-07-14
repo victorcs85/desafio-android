@@ -10,7 +10,7 @@ import com.picpay.desafio.android.core.constants.REMOTE_SOURCE
 import com.picpay.desafio.android.domain.repository.IUserRepository
 import com.picpay.desafio.android.extensions.checkNumberItems
 import com.picpay.desafio.android.extensions.isTextDisplayed
-import com.picpay.desafio.android.presentation.views.MainActivity
+import com.picpay.desafio.android.presentation.MainActivity
 import com.picpay.desafio.android.shared.test.PresentationDataMock
 import io.mockk.coEvery
 import org.koin.core.qualifier.named

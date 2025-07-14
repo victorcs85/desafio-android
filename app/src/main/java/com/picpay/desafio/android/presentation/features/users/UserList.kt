@@ -16,6 +16,9 @@ import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.presentation.theme.AppTheme
 import com.picpay.desafio.android.presentation.theme.BLACK_APP_COLOR
 
+private const val TAG_TEST_USER_LIST = "UserList"
+private const val TAG_TEST_USER_ITEM = "UserItem_"
+
 @Composable
 fun UserList(
     users: List<User>,
@@ -27,7 +30,7 @@ fun UserList(
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.fillMaxSize()
-            .testTag("UserList")
+            .testTag(TAG_TEST_USER_LIST)
     ) {
         items(
             count = users.size,
@@ -38,7 +41,7 @@ fun UserList(
                 UserItem(
                     user = user,
                     onClick = {  },
-                    modifier = Modifier.testTag("UserItem_${user.id}")
+                    modifier = Modifier.testTag("$TAG_TEST_USER_ITEM${user.id}")
                 )
 
             }
