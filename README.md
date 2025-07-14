@@ -43,13 +43,15 @@ dependências utilizadas
 - Atualização da versão gradle.
 - Atualização das dependências.
 - Namespace adicionado no gradle.
-- Removido o kotlin extensions -> usado o ViewBinding.
-- Removido gson, dagger, rxjava e security network.
+- Removido o kotlin extensions.
+- Removido gson, dagger e rxjava.
 - Adicionado exported no manifest.
 - Adicionado nos repositories mavenCentral e gradlePluginPortal.
 - Removido o jcenter (não existe mais).
 - Renomeado PicPayService -> UserRepository
 - No layout da MainActivity simplificado layout para evitar o aninhamento de views.
+- Utilizado Jetpack compose, Koin, compose, viewModel, lifecycle, navigation, coroutines,
+  retrofit, okhttp, coil, material3 e mockk.
 
 ## Premissas
 
@@ -59,27 +61,26 @@ dependências utilizadas
 
 - Nossos relatórios de crash têm mostrado alguns crashes relacionados a campos que não deveriam ser
   nulos sendo nulos e gerenciamento de lifecycle. Gostaríamos que fossem corrigidos.
-  **[x] Implementado LiveData para observar o ciclo de vida dos dados.**
+  **[x] Implementado StateFlow, Compose e Coroutines para observar o ciclo de vida dos dados.**
 
 - Gostaríamos de cachear os dados retornados pelo servidor.
-  **[x] Implementado cache.**
+  **[x] Implementado cache diretamente no Retrofit poderia usar Room e a partir disso chavear a utilização.**
 
 - Haverá mudanças na lógica de negócios e gostaríamos que a arquitetura reaja bem a isso.
-  **[x] Implementado Repository Pattern.
-  [x] Implementado Clean Architecture em 3 camadas (data, domain e presentation).**
+  **[x] Implementado Repository Pattern e UseCase para tratamentos de regras de negócio.
+  [x] Implementado Clean Architecture em 3 camadas (data, domain e presentation). Adicionado uma core de itens em comum**
 
 - Haverá mudanças na lógica de apresentação. Gostaríamos que a arquitetura reaja bem a isso.
-  **[x] Implementado MVVM.
-  [x] Implementado ViewBinding.
-  [x] Implementado LiveData.**
+  **[x] Implementado MVI.
+  [x] Implementado StateFlow.**
 
 - Com um grande número de desenvolvedores e uma quantidade grande de mudanças ocorrendo testes
   automatizados são essenciais.
     - Gostaríamos de ter testes unitários testando nossa lógica de apresentação, negócios e dados
       independentemente, visto que tanto a escrita quanto execução dos mesmos são rápidas.
-      **[x] Implementado testes unitários em repositories e viewmodel.**
+      **[x] Implementado testes unitários em repositories, usecase e viewmodel.**
       **[x] Implementado workflow com GitHub Actions para abertura de PR e release (distribuição na loja).**
 
     - Por outro lado, testes unitários rodam em um ambiente de execução diferenciado e são menos
       fiéis ao dia-a-dia de nossos usuários, então testes instrumentados também são importantes.
-      **[x] Implementado testes instrumentados na MainActivity.**
+      **[x] Implementado testes instrumentados (UI) na UserScreen.**

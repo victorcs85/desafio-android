@@ -47,7 +47,7 @@ class UsersViewModelTest : BaseViewModelTest() {
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
-        viewModel = UsersViewModel(useCase = useCase)
+        viewModel = UsersViewModel(useCase = useCase, dispatchers = testDispatcherProvider)
     }
 
     @After

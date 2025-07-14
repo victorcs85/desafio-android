@@ -2,6 +2,8 @@ package com.picpay.desafio.android.di
 
 import com.picpay.desafio.android.core.constants.API_URL
 import com.picpay.desafio.android.core.interceptor.ConnectivityInterceptor
+import com.picpay.desafio.android.core.providers.IDispatchersProvider
+import com.picpay.desafio.android.core.providers.IDispatchersProviderImpl
 import com.picpay.desafio.android.core.services.WifiService
 import com.picpay.desafio.android.data.source.remote.PicPayService
 import com.picpay.desafio.android.data.source.remote.RetrofitConfig
@@ -57,7 +59,8 @@ class ChallengeInitialization : ModuleInitialization() {
     private val viewModelModule = module {
         viewModel {
             UsersViewModel(
-                useCase = get()
+                useCase = get(),
+                dispatchers = get()
             )
         }
     }
@@ -75,6 +78,10 @@ class ChallengeInitialization : ModuleInitialization() {
         single { WifiService(androidContext()) }
     }
 
+    private val dispatchersModule = module {
+        single<IDispatchersProvider> { IDispatchersProviderImpl() }
+    }
+
     private val interceptorModule = module {
         single { ConnectivityInterceptor(get()) }
     }
@@ -87,6 +94,7 @@ class ChallengeInitialization : ModuleInitialization() {
         viewModelModule,
         serviceModule,
         interceptorModule,
-        useCaseModule
+        useCaseModule,
+        dispatchersModule
     )
 }

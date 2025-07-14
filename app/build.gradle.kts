@@ -53,8 +53,11 @@ android {
         }
     }
     @Suppress("UnstableApiUsage")
-            testOptions {
+    testOptions {
         animationsDisabled = true
+        unitTests.all {
+            it.reports.html.required.set(true)
+        }
         unitTests.isIncludeAndroidResources = true
     }
 }
@@ -129,6 +132,8 @@ dependencies {
     androidTestImplementation(libs.androidx.navigation.testing)
     androidTestImplementation(libs.androidx.espresso.intents)
     androidTestImplementation(libs.koin.test)
+    androidTestImplementation(libs.koin.android)
+    androidTestImplementation(libs.koin.androidx.compose)
     androidTestImplementation(libs.androidx.espresso.contrib) {
         exclude(module = "protobuf-lite")
     }

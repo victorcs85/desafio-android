@@ -1,5 +1,6 @@
 package com.picpay.desafio.android.base
 
+import com.picpay.desafio.android.core.providers.IDispatchersProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -39,10 +40,4 @@ class CoroutineTestRule : TestWatcher() {
 
 fun CoroutineTestRule.runBlockingTest(block: suspend TestScope.() -> Unit) {
     runTest(testBody = block)
-}
-
-interface IDispatchersProvider {
-    val io: CoroutineDispatcher
-    val main: CoroutineDispatcher
-    val default: CoroutineDispatcher
 }

@@ -5,6 +5,7 @@ import androidx.compose.runtime.Stable
 import androidx.lifecycle.viewModelScope
 import com.picpay.desafio.android.core.base.BaseViewModel
 import com.picpay.desafio.android.core.constants.GENERIC_MESSAGE_ERROR
+import com.picpay.desafio.android.core.providers.IDispatchersProvider
 import com.picpay.desafio.android.domain.model.Response
 import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.domain.usecases.IFetchUsersUseCase
@@ -17,8 +18,9 @@ import kotlinx.coroutines.flow.stateIn
 private const val STOP_TIMER_LIMIT = 5000L
 
 class UsersViewModel(
-    private val useCase: IFetchUsersUseCase
-) : BaseViewModel() {
+    private val useCase: IFetchUsersUseCase,
+    dispatchers: IDispatchersProvider
+) : BaseViewModel(dispatchers) {
 
     private val _state = MutableStateFlow(UsersScreenState())
 
