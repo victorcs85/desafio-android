@@ -36,10 +36,10 @@ import com.picpay.desafio.android.presentation.theme.AppTheme
 import com.picpay.desafio.android.presentation.theme.BLACK_APP_COLOR
 import com.picpay.desafio.android.presentation.theme.GREEN_COLOR
 
-private const val TAG_TEST_USER_ITEM = "UserItem_"
-private const val TAG_TEST_USER_NAME = "UserName_"
-private const val TAG_TEST_USER_USERNAME = "UserUsername_"
-private const val TAG_TEST_USER_IMAGE = "UserImage_"
+const val TAG_TEST_USER_ITEM = "UserItem_"
+const val TAG_TEST_USER_NAME = "UserName_"
+const val TAG_TEST_USER_USERNAME = "UserUsername_"
+const val TAG_TEST_USER_IMAGE = "UserImage_"
 
 @Composable
 fun UserItem(user: User, onClick: () -> Unit, modifier: Modifier = Modifier) {
@@ -61,12 +61,12 @@ fun UserItem(user: User, onClick: () -> Unit, modifier: Modifier = Modifier) {
             Text(
                 text = user.username,
                 style = MaterialTheme.typography.bodySmall.copy(color = Color.White),
-                modifier = Modifier.testTag("$TAG_TEST_USER_USERNAME${user.id}")
+                modifier = Modifier.testTag("$TAG_TEST_USER_USERNAME${user.username}")
             )
             Text(
                 text = user.name,
                 style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray),
-                modifier = Modifier.testTag("$TAG_TEST_USER_NAME${user.id}")
+                modifier = Modifier.testTag("$TAG_TEST_USER_NAME${user.name}")
             )
         }
     }
@@ -85,7 +85,7 @@ private fun UserImage(user: User) {
         modifier = Modifier
             .size(48.dp)
             .clip(CircleShape)
-            .testTag("$TAG_TEST_USER_IMAGE${user.id}"),
+            .testTag("$TAG_TEST_USER_IMAGE${user.img}"),
         contentAlignment = Alignment.Center
     ) {
         if (painter.state is AsyncImagePainter.State.Loading) {

@@ -19,7 +19,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.koin.test.KoinTest
 
 @ExperimentalCoroutinesApi
 @SmallTest

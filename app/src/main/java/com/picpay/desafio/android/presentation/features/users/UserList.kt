@@ -16,8 +16,7 @@ import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.presentation.theme.AppTheme
 import com.picpay.desafio.android.presentation.theme.BLACK_APP_COLOR
 
-private const val TAG_TEST_USER_LIST = "UserList"
-private const val TAG_TEST_USER_ITEM = "UserItem_"
+const val TAG_TEST_USER_LIST = "UserList"
 
 @Composable
 fun UserList(
