@@ -1,65 +1,83 @@
 package com.picpay.desafio.android.data.source.remote.repository
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
-import com.picpay.desafio.android.base.CoroutinesTestRule
+import com.picpay.desafio.android.base.CoroutineTestRule
 import com.picpay.desafio.android.data.source.remote.PicPayService
 import com.picpay.desafio.android.data.source.remote.dto.UserDto
-import com.picpay.desafio.android.data.source.remote.mapper.UserMapper
 import com.picpay.desafio.android.domain.mapper.DomainMapper
+import com.picpay.desafio.android.domain.model.Response
 import com.picpay.desafio.android.domain.model.User
+import com.picpay.desafio.android.domain.repository.IUserRepository
 import com.picpay.desafio.android.shared.test.DataMockTest
+import com.picpay.desafio.android.shared.test.GENERIC_ERROR
+import com.picpay.desafio.android.shared.test.NETWORK_ERROR
 import io.mockk.coEvery
-import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 import org.koin.test.KoinTest
 
 @ExperimentalCoroutinesApi
 @SmallTest
-class UserRepositoryRemoteTest : KoinTest {
+class UserRepositoryRemoteTest {
 
-    private lateinit var repository: UserRepositoryImpl
-    private val service: PicPayService = mockk()
-    private val mapper: DomainMapper<UserDto, User> = UserMapper()
+    private val remoteDataService = mockk<PicPayService>(relaxed = true)
+    private val mapper = mockk<DomainMapper<UserDto, User>>(relaxed = true)
 
-    @get:Rule
-    val rule: TestRule = InstantTaskExecutorRule()
+    private lateinit var repository: IUserRepository
 
     @get:Rule
-    val coroutinesTestRule = CoroutinesTestRule()
+    val coroutineRule = CoroutineTestRule()
 
     @Before
-    fun setUp() {
-        repository = UserRepositoryImpl(service, mapper)
+    fun setup() {
+        repository = UserRepositoryImpl(remoteDataService, mapper)
     }
 
     @Test
     fun givenUsers_whenGetUsers_thenFetchAPISuccessfully() = runTest {
-        val apiUsers = DataMockTest.USERS_RESPONSE_MOCK
-        val mappedUsers = apiUsers.map { mapper.toDomain(it) }
+        val apiUsers = DataMockTest.usersDtoMock
+        val mappedUsers = DataMockTest.usersMock
 
-        coEvery { service.getUsers() } returns apiUsers
+        coEvery { remoteDataService.getUsers() } returns apiUsers
+        every { mapper.toDomain(apiUsers) } returns mappedUsers
 
         val result = repository.getUsers()
 
-//        assertEquals(mappedUsers, result)
-        coVerify { service.getUsers() }
+        assert(result is Response.Success && result.data == mappedUsers)
     }
 
     @Test
-    fun givenEmptyUserList_whenGetUsers_thenReturnEmptyList() = runTest {
-        val emptyUserList = emptyList<User>()
+    fun givenUsers_whenFetchData_thenReturnError() = runTest {
+        val apiUsers = DataMockTest.usersDtoMock
+        val mappedUsers = DataMockTest.usersMock
 
-        coEvery { service.getUsers() } returns emptyList()
+        coEvery {
+            remoteDataService.getUsers()
+        } throws DataMockTest.genericErrorMock
+        every { mapper.toDomain(apiUsers) } returns mappedUsers
 
         val result = repository.getUsers()
 
-//        assertEquals(emptyUserList, result)
+        assert(result is Response.Error && result.errorMessage.contains(GENERIC_ERROR))
+    }
+
+    @Test
+    fun givenWithoutNetwork_whenFetchUsersData_thenReturnError() = runTest {
+        val apiUsers = DataMockTest.usersDtoMock
+        val mappedUsers = DataMockTest.usersMock
+
+        coEvery {
+            remoteDataService.getUsers()
+        } throws DataMockTest.errorNetworkMock
+        every { mapper.toDomain(apiUsers) } returns mappedUsers
+
+        val result = repository.getUsers()
+
+        assert(result is Response.Error && result.errorMessage.contains(NETWORK_ERROR))
     }
 }

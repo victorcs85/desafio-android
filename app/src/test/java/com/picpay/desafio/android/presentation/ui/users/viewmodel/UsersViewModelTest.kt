@@ -2,122 +2,115 @@ package com.picpay.desafio.android.presentation.ui.users.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
-import com.picpay.desafio.android.base.CoroutinesTestRule
-import com.picpay.desafio.android.di.ChallengeInitialization
-import com.picpay.desafio.android.domain.repository.IUserRepository
+import app.cash.turbine.test
+import com.picpay.desafio.android.base.BaseViewModelTest
+import com.picpay.desafio.android.base.CoroutineTestRule
+import com.picpay.desafio.android.domain.usecases.IFetchUsersUseCase
+import com.picpay.desafio.android.presentation.features.users.UsersIntent
 import com.picpay.desafio.android.presentation.features.users.UsersViewModel
+import com.picpay.desafio.android.shared.test.DataMockTest
+import com.picpay.desafio.android.shared.test.GENERIC_ERROR
+import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
-import org.koin.core.context.loadKoinModules
-import org.koin.core.logger.Level
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
-import org.koin.test.KoinTest
-import org.koin.test.KoinTestRule
 import org.mockito.junit.MockitoJUnitRunner
-
-private const val REMOTE_SOURCE = "remote"
-private const val ERROR = "Ocorreu um erro. Tente novamente."
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 @SmallTest
-class UsersViewModelTest : KoinTest {
+class UsersViewModelTest : BaseViewModelTest() {
+
+    @get:Rule
+    val coroutineRule = CoroutineTestRule()
 
     @get:Rule
     val rule: TestRule = InstantTaskExecutorRule()
 
-    @get:Rule
-    val coroutinesTestRule = CoroutinesTestRule()
+    private val useCase = mockk<IFetchUsersUseCase>(relaxed = true)
 
-    @get:Rule
-    val koinRule = KoinTestRule.create {
-        printLogger(Level.ERROR)
-        allowOverride(true)
-        loadKoinModules(
-            modules = ChallengeInitialization().init() +
-                    module {
-                        single(named(REMOTE_SOURCE)) { remoteRepository }
-                        single {
-//                            UsersViewModel(
-//                                remoteRepository = get(named(REMOTE_SOURCE))
-//                            )
-                        }
-                    }
-        )
+    private lateinit var viewModel: UsersViewModel
+
+    @Before
+    fun setup() {
+        Dispatchers.setMain(testDispatcher)
+        viewModel = UsersViewModel(useCase = useCase)
     }
 
-    private val remoteRepository: IUserRepository = mockk()
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
+    }
 
-    private lateinit var usersViewModel: UsersViewModel
+    @Test
+    fun givenValidFlow_whenFetchUsersData_thenReturnDataSuccessfully() =
+        runTest {
 
-//    @Before
-//    fun setUp() {
-//        usersViewModel = UsersViewModel(remoteRepository)
-//    }
-//
-//    @After
-//    fun tearDown() {
-//        stopKoin()
-//    }
-//
-//    @Test
-//    fun givenUsersScreen_whenFetchUsers_thenReturnSuccessfully() = runTest {
-//        val mockUsersResponse = DataMockTest.USERS_MOCK
-//
-//        val usersObserver = usersViewModel.users.test()
-//        coEvery { remoteRepository.getUsers() } returns mockUsersResponse
-//
-//        usersViewModel.fetchUsers()
-//
-//        verifySequence {
-//            usersObserver.run {
-//                onChanged(Response.Idle)
-//                onChanged(Response.Loading)
-//                onChanged(Response.Success(mockUsersResponse))
-//            }
-//        }
-//        confirmVerified(usersObserver)
-//    }
-//
-//    @Test
-//    fun givenUsersScreen_whenFetchUsersWithError_thenReturnError() = runTest {
-//
-//        val usersObserver = usersViewModel.users.test()
-//
-//        coEvery { remoteRepository.getUsers() } throws Exception(ERROR)
-//
-//        usersViewModel.fetchUsers()
-//
-//        verifySequence {
-//            usersObserver.run {
-//                onChanged(Response.Idle)
-//                onChanged(Response.Loading)
-//                onChanged(Response.Failure(ERROR))
-//            }
-//        }
-//        confirmVerified(usersObserver)
-//    }
-//
-//    @Test
-//    fun givenForceRefresh_whenFetchUsers_thenReturnSuccessfully() = runTest {
-//        val mockUsersResponse = DataMockTest.USERS_MOCK
-//        coEvery { remoteRepository.getUsers() } returns mockUsersResponse
-//
-//        val usersObserver = usersViewModel.users.test()
-//
-//        usersViewModel.fetchUsers(forceRefresh = true)
-//
-//        verifySequence {
-//            usersObserver.run {
-//                onChanged(Response.Idle)
-//                onChanged(Response.Loading)
-//                onChanged(Response.Success(mockUsersResponse))
-//            }
-//        }
-//        confirmVerified(usersObserver)
-//    }
+            val responseMock = DataMockTest.usersResponseMock
+            val expectedState = DataMockTest.userScreenStateMock
+
+            coEvery {
+                useCase.invoke()
+            } returns responseMock
+
+            viewModel.screenState.test {
+                viewModel.execute(UsersIntent.FetchUsers)
+
+                awaitItem()
+
+                val finalState = awaitItem()
+
+                assertEquals(
+                    expectedState.users,
+                    finalState.users
+                )
+                assertNull(finalState.errorMessage)
+                assertFalse(finalState.isLoading)
+
+                cancelAndIgnoreRemainingEvents()
+            }
+
+            coEvery { useCase.invoke() }
+        }
+
+    @Test
+    fun givenInvalidFlow_whenFetchUsersData_thenReturnError() =
+        runTest {
+
+            val responseMock = DataMockTest.genericResponseErrorMock
+
+            coEvery {
+                useCase.invoke()
+            } returns responseMock
+
+
+
+            viewModel.screenState.test {
+                viewModel.execute(UsersIntent.FetchUsers)
+
+                awaitItem()
+
+                val finalState = awaitItem()
+                assertEquals(GENERIC_ERROR, finalState.errorMessage)
+                assertTrue(finalState.users == null)
+                assertFalse(finalState.isLoading)
+
+                cancelAndIgnoreRemainingEvents()
+            }
+
+            coEvery { useCase.invoke() }
+        }
 }
