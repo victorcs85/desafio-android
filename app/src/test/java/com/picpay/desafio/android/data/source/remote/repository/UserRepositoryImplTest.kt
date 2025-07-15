@@ -1,11 +1,11 @@
 package com.picpay.desafio.android.data.source.remote.repository
 
 import androidx.test.filters.SmallTest
+import br.com.victorcs.core.domain.model.Response
 import com.picpay.desafio.android.base.CoroutineTestRule
 import com.picpay.desafio.android.data.source.remote.PicPayService
 import com.picpay.desafio.android.data.source.remote.dto.UserDto
 import com.picpay.desafio.android.domain.mapper.DomainMapper
-import com.picpay.desafio.android.domain.model.Response
 import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.domain.repository.IUserRepository
 import com.picpay.desafio.android.shared.test.DataMockTest

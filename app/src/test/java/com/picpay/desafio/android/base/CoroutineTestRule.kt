@@ -1,6 +1,6 @@
 package com.picpay.desafio.android.base
 
-import com.picpay.desafio.android.core.providers.IDispatchersProvider
+import br.com.victorcs.core.providers.IDispatchersProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

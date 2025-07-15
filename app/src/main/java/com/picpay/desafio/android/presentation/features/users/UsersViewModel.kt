@@ -3,10 +3,10 @@ package com.picpay.desafio.android.presentation.features.users
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.viewModelScope
-import com.picpay.desafio.android.core.base.BaseViewModel
-import com.picpay.desafio.android.core.constants.GENERIC_MESSAGE_ERROR
-import com.picpay.desafio.android.core.providers.IDispatchersProvider
-import com.picpay.desafio.android.domain.model.Response
+import br.com.victorcs.core.base.BaseViewModel
+import br.com.victorcs.core.constants.GENERIC_MESSAGE_ERROR
+import br.com.victorcs.core.domain.model.Response
+import br.com.victorcs.core.providers.IDispatchersProvider
 import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.domain.usecases.IFetchUsersUseCase
 import kotlinx.coroutines.flow.MutableStateFlow

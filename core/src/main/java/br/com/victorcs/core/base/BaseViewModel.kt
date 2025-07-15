@@ -1,8 +1,8 @@
-package com.picpay.desafio.android.core.base
+package br.com.victorcs.core.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.picpay.desafio.android.core.providers.IDispatchersProvider
+import br.com.victorcs.core.providers.IDispatchersProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

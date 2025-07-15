@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.domain.model
+package br.com.victorcs.core.domain.model
 
 sealed class Response<out T> {
     data class Success<out T>(

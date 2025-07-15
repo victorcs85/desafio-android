@@ -1,10 +1,10 @@
 package com.picpay.desafio.android.shared.test
 
-import com.picpay.desafio.android.core.constants.GENERIC_MESSAGE_ERROR
+import br.com.victorcs.core.constants.GENERIC_MESSAGE_ERROR
+import br.com.victorcs.core.domain.model.ErrorType
+import br.com.victorcs.core.domain.model.Response
+import br.com.victorcs.core.exceptions.WithoutNetworkException
 import com.picpay.desafio.android.data.source.remote.dto.UserDto
-import com.picpay.desafio.android.data.source.remote.exceptions.WithoutNetworkException
-import com.picpay.desafio.android.domain.model.ErrorType
-import com.picpay.desafio.android.domain.model.Response
 import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.presentation.features.users.UsersScreenState
 import java.util.InputMismatchException

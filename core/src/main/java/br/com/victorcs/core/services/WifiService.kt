@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.core.services
+package br.com.victorcs.core.services
 
 import android.content.Context
 import android.net.ConnectivityManager

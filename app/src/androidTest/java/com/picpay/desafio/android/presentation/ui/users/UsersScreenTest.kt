@@ -9,7 +9,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.test.filters.MediumTest
-import com.picpay.desafio.android.core.providers.IDispatchersProvider
+import br.com.victorcs.core.providers.IDispatchersProvider
 import com.picpay.desafio.android.domain.usecases.IFetchUsersUseCase
 import com.picpay.desafio.android.presentation.MainActivity
 import com.picpay.desafio.android.presentation.features.users.TAG_TEST_USER_IMAGE

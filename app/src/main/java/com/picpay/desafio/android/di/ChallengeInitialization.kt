@@ -1,10 +1,10 @@
 package com.picpay.desafio.android.di
 
-import com.picpay.desafio.android.core.constants.API_URL
-import com.picpay.desafio.android.core.interceptor.ConnectivityInterceptor
-import com.picpay.desafio.android.core.providers.IDispatchersProvider
-import com.picpay.desafio.android.core.providers.IDispatchersProviderImpl
-import com.picpay.desafio.android.core.services.WifiService
+import br.com.victorcs.core.constants.API_URL
+import br.com.victorcs.core.interceptor.ConnectivityInterceptor
+import br.com.victorcs.core.providers.IDispatchersProvider
+import br.com.victorcs.core.providers.IDispatchersProviderImpl
+import br.com.victorcs.core.services.WifiService
 import com.picpay.desafio.android.data.source.remote.PicPayService
 import com.picpay.desafio.android.data.source.remote.RetrofitConfig
 import com.picpay.desafio.android.data.source.remote.dto.UserDto

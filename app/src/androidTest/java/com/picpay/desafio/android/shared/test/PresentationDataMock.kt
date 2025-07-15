@@ -1,7 +1,7 @@
 package com.picpay.desafio.android.shared.test
 
-import com.picpay.desafio.android.domain.model.ErrorType
-import com.picpay.desafio.android.domain.model.Response
+import br.com.victorcs.core.domain.model.ErrorType
+import br.com.victorcs.core.domain.model.Response
 import com.picpay.desafio.android.domain.model.User
 
 const val ID_USER = 1001

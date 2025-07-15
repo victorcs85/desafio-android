@@ -1,6 +1,6 @@
 package com.picpay.desafio.android.data.source.remote.repository
 
-import com.picpay.desafio.android.core.extensions.safeApiCall
+import br.com.victorcs.core.extensions.safeApiCall
 import com.picpay.desafio.android.data.source.remote.PicPayService
 import com.picpay.desafio.android.data.source.remote.dto.UserDto
 import com.picpay.desafio.android.domain.mapper.DomainMapper

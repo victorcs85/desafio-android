@@ -1,8 +1,8 @@
 package com.picpay.desafio.android.domain.usecases
 
 import androidx.test.filters.SmallTest
+import br.com.victorcs.core.domain.model.Response
 import com.picpay.desafio.android.base.CoroutineTestRule
-import com.picpay.desafio.android.domain.model.Response
 import com.picpay.desafio.android.domain.repository.IUserRepository
 import com.picpay.desafio.android.shared.test.DataMockTest
 import com.picpay.desafio.android.shared.test.GENERIC_ERROR

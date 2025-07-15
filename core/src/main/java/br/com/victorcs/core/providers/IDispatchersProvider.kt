@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.core.providers
+package br.com.victorcs.core.providers
 
 import kotlinx.coroutines.CoroutineDispatcher
 

@@ -1,10 +1,10 @@
 package com.picpay.desafio.android.data.source.remote
 
 import android.content.Context
+import br.com.victorcs.core.interceptor.CacheControlInterceptor
+import br.com.victorcs.core.interceptor.ConnectivityInterceptor
+import br.com.victorcs.core.services.WifiService
 import com.picpay.desafio.android.BuildConfig
-import com.picpay.desafio.android.core.interceptor.CacheControlInterceptor
-import com.picpay.desafio.android.core.interceptor.ConnectivityInterceptor
-import com.picpay.desafio.android.core.services.WifiService
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

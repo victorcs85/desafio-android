@@ -1,6 +1,6 @@
 package com.picpay.desafio.android.data.source.remote.mapper
 
-import com.picpay.desafio.android.core.extensions.orZero
+import br.com.victorcs.core.extensions.orZero
 import com.picpay.desafio.android.data.source.remote.dto.UserDto
 import com.picpay.desafio.android.domain.mapper.DomainMapper
 import com.picpay.desafio.android.domain.model.User

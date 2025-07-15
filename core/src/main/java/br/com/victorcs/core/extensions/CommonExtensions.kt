@@ -1,11 +1,11 @@
-package com.picpay.desafio.android.core.extensions
+package br.com.victorcs.core.extensions
 
-import com.picpay.desafio.android.core.constants.GENERIC_MESSAGE_ERROR
-import com.picpay.desafio.android.core.constants.NETWORK_ERROR
-import com.picpay.desafio.android.core.constants.ZERO
-import com.picpay.desafio.android.data.source.remote.exceptions.WithoutNetworkException
-import com.picpay.desafio.android.domain.model.ErrorType
-import com.picpay.desafio.android.domain.model.Response
+import br.com.victorcs.core.constants.GENERIC_MESSAGE_ERROR
+import br.com.victorcs.core.constants.NETWORK_ERROR
+import br.com.victorcs.core.constants.ZERO
+import br.com.victorcs.core.domain.model.ErrorType
+import br.com.victorcs.core.domain.model.Response
+import br.com.victorcs.core.exceptions.WithoutNetworkException
 import timber.log.Timber
 import java.io.IOException
 

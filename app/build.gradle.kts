@@ -64,6 +64,10 @@ android {
 
 dependencies {
 
+    //region submodules
+    implementation(project(":core"))
+    //endregion
+
     //region App
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
