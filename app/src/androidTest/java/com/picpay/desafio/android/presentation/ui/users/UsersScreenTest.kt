@@ -60,7 +60,7 @@ class UsersScreenTest {
         coEvery { useCase.invoke() } returns PresentationDataMock.usersMock
     }
 
-    private fun launchScreen( initialState: UsersScreenState = UsersScreenState(isLoading = true)) {
+    private fun launchScreen() {
         loadKoinModules(module {
             single { useCase }
             single<IDispatchersProvider> { testDispatchersProvider }
