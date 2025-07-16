@@ -142,4 +142,22 @@ class UsersScreenTest {
         composeTestRule.onNodeWithTag(LOADING_VIEW_TEST_TAG).assertIsDisplayed()
     }
 
+    @Test
+    fun givenRotatedDevice_whenScreenIsRecomposed_thenListIsPreserved() = runTest(testDispatcher) {
+        launchScreen()
+        testDispatcher.scheduler.runCurrent()
+
+        composeTestRule.onNodeWithTag(TAG_TEST_USER_LIST).assertIsDisplayed()
+        composeTestRule.onNodeWithTag("${TAG_TEST_USER_ITEM}${ID_USER}").assertIsDisplayed()
+
+        composeTestRule.activityRule.scenario.recreate()
+        testDispatcher.scheduler.runCurrent()
+
+        composeTestRule.onNodeWithTag(TAG_TEST_USER_LIST).assertIsDisplayed()
+        composeTestRule.onNodeWithTag("${TAG_TEST_USER_ITEM}${ID_USER}").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("${TAG_TEST_USER_NAME}${NAME_USER}").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("${TAG_TEST_USER_USERNAME}${USERNAME}").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("${TAG_TEST_USER_IMAGE}${IMG_USER}").assertIsDisplayed()
+    }
+
 }
